@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/assets/logos/isotipo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#F0B410" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Farmacia Policlínica Metropolitana — Gestión operativa 2025-2026</title>
+
+    <!--
+      La hoja de estilos completa se carga sin bloquear el primer pintado
+      (ver el plugin "async-css" en vite.config.js, que reescribe el <link>
+      que Vite inyecta al build). El único CSS bloqueante es el bloque
+      inline de abajo — unas pocas líneas, instantáneo.
+    -->
+    <style>
+      html, body, #root { background: #FFFFFF; margin: 0; height: 100%; }
+
+      /* Cargador ESTÁTICO: visible en cuanto el HTML se parsea, antes de que
+         se ejecute una sola línea de React. Al montar la app lo reemplaza la
+         versión real con progreso — mismo lenguaje visual, sin parpadeo. */
+      .arranque {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 26px;
+        background: #FFFFFF;
+        font-family: Calibri, Carlito, 'Segoe UI', system-ui, sans-serif;
+      }
+      .arranque__texto {
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(40, 74, 134, 0.72);
+      }
+      .arranque__pista {
+        position: relative;
+        width: min(420px, 62vw);
+        height: 6px;
+        border-radius: 999px;
+        background: rgba(40, 74, 134, 0.12);
+        overflow: hidden;
+      }
+      .arranque__relleno {
+        position: absolute;
+        top: 0;
+        left: -40%;
+        height: 100%;
+        width: 40%;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #FFC311, #F0B410);
+        animation: arranqueIndet 1.3s ease-in-out infinite;
+      }
+      @keyframes arranqueIndet {
+        0%   { left: -40%; }
+        100% { left: 100%; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <div class="arranque" aria-hidden="true">
+        <div class="arranque__texto">Cargando presentación</div>
+        <div class="arranque__pista"><div class="arranque__relleno"></div></div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
