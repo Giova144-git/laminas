@@ -1,3 +1,4 @@
+import { asset } from '../rutas.js'
 /* Cromo de presentación:
    - contador con el isotipo de la farmacia abajo-izquierda, que cambia de
      color según el fondo de la lámina (amarillo sobre claro, blanco sobre azul)
@@ -7,7 +8,7 @@
 export default function NavigationBar({ slides, current, onGo, onPrev, onNext, onFullscreen, oscura }) {
   const n = slides.length
   const pct = n > 1 ? (current / (n - 1)) * 100 : 0
-  const iso = oscura ? '/assets/logos/isotipo-negativo.png' : '/assets/logos/isotipo.png'
+  const iso = asset(oscura ? '/assets/logos/isotipo-negativo.png' : '/assets/logos/isotipo.png')
 
   return (
     <div className={`cromo ${oscura ? 'oscuro' : ''}`} aria-label="Navegación de láminas">
@@ -41,7 +42,7 @@ export default function NavigationBar({ slides, current, onGo, onPrev, onNext, o
             />
           ))}
           <div className="riel-marcador" style={{ transform: `translateX(${pct}%)` }}>
-            <img className="marcador" src="/assets/logos/isotipo.png" alt="" />
+            <img className="marcador" src={asset('/assets/logos/isotipo.png')} alt="" />
           </div>
         </div>
 

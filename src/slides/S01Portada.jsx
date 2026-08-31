@@ -1,4 +1,5 @@
 import Lamina from '../components/Lamina.jsx'
+import { asset } from '../rutas.js'
 
 /* Portada — calca la lámina 2 de la plantilla corporativa: masa amarilla con
    la fachada al fondo, panel blanco girado a la derecha y el título abajo a
@@ -19,7 +20,7 @@ export default function S01Portada() {
         }}
       >
         <img
-          src="/assets/logos/logotipo.png"
+          src={asset('/assets/logos/logotipo.png')}
           alt="Farmacia Policlínica Metropolitana"
           style={{ height: 404, display: 'block' }}
         />

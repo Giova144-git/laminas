@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { asset } from '../rutas.js'
 
 /* Recorte de un gráfico del tablero de KPIs (PPTX "KPI's farmacia Julio 26").
    Los gráficos NO se re-dibujan: se muestran tal como los generó Power BI,
@@ -10,7 +11,7 @@ export function Grafico({ name, className = '', style = {}, alt = '' }) {
   if (!falta) {
     return (
       <img
-        src={`/assets/graficos/${name}`}
+        src={asset(`/assets/graficos/${name}`)}
         onError={() => setFalta(true)}
         className={`grafico ${className}`}
         style={style}
@@ -33,7 +34,7 @@ export function Icono({ n, size = 64, className = '', style = {} }) {
   return (
     <img
       className={`icono ${className}`}
-      src={`/assets/iconos/icono-${String(n).padStart(2, '0')}.png`}
+      src={asset(`/assets/iconos/icono-${String(n).padStart(2, '0')}.png`)}
       style={{ width: size, height: size, ...style }}
       alt=""
     />

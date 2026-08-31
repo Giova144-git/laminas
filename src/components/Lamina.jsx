@@ -1,3 +1,4 @@
+import { asset } from '../rutas.js'
 /* Envoltorio de lámina: pone el fondo corporativo, la cabecera de la
    plantilla (título + filete amarillo) y el sello con el isotipo de la
    farmacia.
@@ -30,7 +31,7 @@ export default function Lamina({
   children,
   className = '',
 }) {
-  const src = fondo ? `/assets/fondos/fondo-${String(fondo).padStart(2, '0')}.png` : null
+  const src = fondo ? asset(`/assets/fondos/fondo-${String(fondo).padStart(2, '0')}.png`) : null
   const claro = cabeceraClara || oscura
 
   return (
@@ -53,12 +54,12 @@ export default function Lamina({
       {!sinSello && (
         selloEnBanda ? (
           <div className="sello-banda anim">
-            <img src="/assets/logos/isotipo-negativo.png" alt="Farmacia Policlínica Metropolitana" />
+            <img src={asset('/assets/logos/isotipo-negativo.png')} alt="Farmacia Policlínica Metropolitana" />
           </div>
         ) : (
           <div className={`sello ${selloBlanco ? 'sello-blanco' : ''} anim`}>
             <img
-              src={selloBlanco ? '/assets/logos/isotipo.png' : '/assets/logos/isotipo-negativo.png'}
+              src={asset(selloBlanco ? '/assets/logos/isotipo.png' : '/assets/logos/isotipo-negativo.png')}
               alt="Farmacia Policlínica Metropolitana"
             />
           </div>

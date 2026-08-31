@@ -1,3 +1,4 @@
+import { asset } from '../rutas.js'
 /* Pantalla de carga: bloquea la presentación (nada se monta detrás) hasta
    que la tipografía, los logos, los 17 fondos de la plantilla y los
    recortes de los tableros estén en memoria. Sin esto, la primera pasada
@@ -5,7 +6,7 @@
 export default function LoadingScreen({ progress, fadingOut }) {
   return (
     <div className={`pantalla-carga ${fadingOut ? 'se-va' : ''}`} role="status" aria-live="polite">
-      <img className="carga-logo" src="/assets/logos/isotipo.png" alt="" />
+      <img className="carga-logo" src={asset('/assets/logos/isotipo.png')} alt="" />
       <div className="carga-texto">Cargando presentación</div>
       <div className="carga-pista">
         <div className="carga-relleno" style={{ transform: `scaleX(${progress / 100})` }} />

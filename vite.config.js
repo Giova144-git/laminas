@@ -23,6 +23,10 @@ function asyncCss() {
 
 // https://vite.dev/config/
 export default defineConfig({
+  /* GitHub Pages sirve el deck desde un subdirectorio (…github.io/laminas/).
+     La base llega por entorno para que `npm run dev` siga sirviendo en la
+     raíz y no haya que tocar la config al alternar entre local y publicado. */
+  base: process.env.VITE_BASE || '/',
   plugins: [react(), asyncCss()],
   /* puerto fijo: el deck se abre siempre en la misma dirección, y el
      entorno de vista previa no tiene que adivinar a cuál saltó Vite */

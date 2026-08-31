@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { asset } from '../rutas.js'
 
 /* Precarga todo antes de mostrar el deck: tipografía, logos, los fondos de
    la plantilla corporativa, los iconos y los recortes de los tableros.
@@ -13,21 +14,21 @@ import { useEffect, useState } from 'react'
    singleton, ambas invocaciones se SUSCRIBEN al mismo proceso en curso. */
 
 const LOGOS = [
-  '/assets/logos/isotipo.png',
-  '/assets/logos/isotipo-negativo.png',
-  '/assets/logos/isotipo-azul.png',
-  '/assets/logos/logotipo.png',
-  '/assets/logos/logotipo-negativo.png',
-  '/assets/logos/logotipo-azul.png',
+  asset('/assets/logos/isotipo.png'),
+  asset('/assets/logos/isotipo-negativo.png'),
+  asset('/assets/logos/isotipo-azul.png'),
+  asset('/assets/logos/logotipo.png'),
+  asset('/assets/logos/logotipo-negativo.png'),
+  asset('/assets/logos/logotipo-azul.png'),
 ]
 
 /* fondos disponibles: las láminas 6 y 20 del PPTX no traen imagen de fondo
    (son blanco liso), por eso faltan de la serie */
 const FONDOS = [2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
-  .map((n) => `/assets/fondos/fondo-${String(n).padStart(2, '0')}.png`)
+  .map((n) => asset(`/assets/fondos/fondo-${String(n).padStart(2, '0')}.png`))
 
 const ICONOS = Array.from({ length: 29 }, (_, i) =>
-  `/assets/iconos/icono-${String(i + 1).padStart(2, '0')}.png`)
+  asset(`/assets/iconos/icono-${String(i + 1).padStart(2, '0')}.png`))
 
 /* recortes de los tableros de Power BI (PPTX "KPI's farmacia Julio 26").
    Se añaden aquí a medida que cada lámina los va usando. */
@@ -48,7 +49,7 @@ const GRAFICOS = [
   'sem-pagadores',
   'sem-participacion',
   'tipo-cliente',
-].map((n) => `/assets/graficos/${n}.png`)
+].map((n) => asset(`/assets/graficos/${n}.png`))
 
 const TODAS = [...LOGOS, ...FONDOS, ...ICONOS, ...GRAFICOS]
 
