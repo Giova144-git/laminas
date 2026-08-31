@@ -1,0 +1,55 @@
+# Publica el deck en GitHub Pages en cada push a main.
+#
+# El build se hace con VITE_BASE=/laminas/ porque Pages sirve el sitio desde
+# un subdirectorio del dominio: sin esa base, las rutas de fondos, logos,
+# iconos y recortes apuntarían a la raíz y todas darían 404.
+name: Publicar en GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# una publicación a la vez; si llega un push nuevo, se cancela la anterior
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  construir:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - run: npm ci
+
+      - name: Construir el deck
+        run: npm run build
+        env:
+          VITE_BASE: /laminas/
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  publicar:
+    needs: construir
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.despliegue.outputs.page_url }}
+    steps:
+      - id: despliegue
+        uses: actions/deploy-pages@v4

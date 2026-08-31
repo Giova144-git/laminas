@@ -1,0 +1,4 @@
+# El deck lleva cifras de gestión de la farmacia: se sirve en abierto por
+# comodidad de reparto, pero no se quiere en los buscadores.
+User-agent: *
+Disallow: /
