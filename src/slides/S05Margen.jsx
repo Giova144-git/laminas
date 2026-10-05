@@ -1,73 +1,63 @@
 import Lamina from '../components/Lamina.jsx'
 import { Grafico } from '../components/Grafico.jsx'
 import Comparativa from '../components/Comparativa.jsx'
+import Conclusion from '../components/Conclusion.jsx'
 
-/* Margen bruto — recorte del tablero de márgenes (lámina 19 del PPTX de KPIs).
-   Esta lámina va sobre blanco liso: es la equivalente a la lámina 6 de la
-   plantilla, la única del set que no trae imagen de fondo.
+/* Margen bruto — recorte del tablero de márgenes (lámina 19 del PDF de
+   agosto), sobre fondo blanco.
 
-   La fila inferior suma el cierre de mes. Ingresos y costo van en importe,
-   porque son magnitudes; el margen va en PORCENTAJE, que es la métrica de
-   negocio — en dólares caía un 4 % arrastrado por el volumen y eso leía como
-   deterioro cuando la tasa se mantuvo. Los importes en dólares quedan al pie
-   de esa tarjeta para no perder el dato.
-
-   Power BI redondea esos importes a miles, así que todo va con "≈" y la
-   variación del margen se declara estable en vez de fingir décimas: con esa
-   redondeo, $52/$122 y $50/$117 no distinguen una décima de otra. */
+   Ingresos del mes: exactos, del gráfico de facturación ($117.175,00 →
+   $122.579,66). Costo y margen del mes: del gráfico de márgenes, que Power BI
+   redondea a miles, así que van con "≈":
+     costo  julio ≈ $67 mil → agosto ≈ $73 mil  (≈ +9 %, rango +7,4 a +10,5 %)
+     margen julio ≈ $50 mil (≈ 42,7 %) → agosto ≈ $49 mil (≈ 40,2 %)
+   Con agosto dentro de la ventana el margen anual pasó de 42,56 % (agosto
+   2025 – julio 2026) a 42,21 %.
+   Margen de medicinas: lámina 23, 40,49 % contra 37,23 % del período pasado. */
 export default function S05Margen() {
   return (
-    <Lamina fondo={null} titulo="Margen bruto" subtitulo="Agosto 2025 – Julio 2026">
+    <Lamina fondo={17} titulo="Margen bruto" subtitulo="Septiembre 2025 – agosto 2026 · frente a septiembre 2024 – agosto 2025">
       <div className="lienzo">
-        <div className="bloque-grafico fila-crece">
+        <div className="grafico-y-rejilla columna-ancha fila-crece">
           <div className="marco-grafico">
             <Grafico name="anual-margen.png" alt="Ingresos, costo promedio y margen bruto por mes" />
           </div>
           <div className="columna-cifras">
             <div className="tarjeta-cifra">
-              <div className="rot">Ingresos</div>
-              <div className="val val-sm">$1.226.616,10</div>
+              <div className="rot">Margen bruto · 12 meses</div>
+              <div className="val">42,21 %</div>
+              <div className="pie">Ingresos $1.249.909,29 · costo promedio $722.474,05</div>
             </div>
             <div className="tarjeta-cifra">
-              <div className="rot">Costo promedio</div>
-              <div className="val val-sm">$704.729,06</div>
+              <div className="rot">Margen en medicinas · 12 meses</div>
+              <div className="val val-sm">40,49 % <span className="delta sube" style={{ fontSize: 17 }}>+8,75 %</span></div>
+              <div className="pie">12 meses anteriores: 37,23 %</div>
             </div>
-            <div className="tarjeta-cifra destacada">
-              <div className="rot">Margen bruto</div>
-              <div className="val">42,56 %</div>
-            </div>
+            <Comparativa
+              rot="Costo del mes · julio → agosto"
+              antes="≈ $67 mil"
+              ahora="≈ $73 mil"
+              delta="≈ +9 %"
+              invertirColor
+              pie="Ingresos del mes: $117.175 → $122.580"
+            />
+            <Comparativa
+              destacada
+              rot="Margen bruto del mes · julio → agosto"
+              antes="≈ 42,7 %"
+              ahora="≈ 40,2 %"
+              delta="≈ −2,5 puntos"
+              pie="En dólares: ≈ $50 mil → ≈ $49 mil"
+            />
           </div>
         </div>
 
-        <div className="rejilla rejilla-4" style={{ minHeight: 196 }}>
-          <div className="tarjeta-cifra">
-            <div className="rot">Margen en medicinas</div>
-            <div className="val val-sm">40,49 % <span className="delta sube" style={{ fontSize: 17 }}>+10,87 %</span></div>
-            <div className="pie">Período anterior: 36,52 %</div>
-          </div>
-          <Comparativa
-            rot="Ingresos del mes · junio → julio"
-            junio="≈ $122 mil"
-            julio="≈ $117 mil"
-            delta="≈ −4 %"
-          />
-          <Comparativa
-            rot="Costo del mes · junio → julio"
-            junio="≈ $71 mil"
-            julio="≈ $67 mil"
-            delta="≈ −6 %"
-            invertirColor
-            pie="Bajar el costo con la venta juega a favor"
-          />
-          <Comparativa
-            destacada
-            rot="Margen bruto del mes · junio → julio"
-            junio="≈ 42,6 %"
-            julio="≈ 42,7 %"
-            delta="estable"
-            pie="Se sostuvo con menos volumen · ≈ $52 mil → ≈ $50 mil"
-          />
-        </div>
+        <Conclusion>
+          Agosto vendió 4,6 % más que julio, pero el costo creció cerca del doble: el margen
+          del mes bajó a ≈ 40 % y en dólares quedó en el nivel de julio. Con agosto dentro,
+          el margen de los doce meses pasó de 42,56 % a 42,21 %. Medicinas sigue arriba:
+          40,49 % contra 37,23 % de los doce meses anteriores.
+        </Conclusion>
       </div>
     </Lamina>
   )

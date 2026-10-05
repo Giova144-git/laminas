@@ -13,8 +13,10 @@ import { asset } from '../rutas.js'
      · `cabeceraClara`      → título en blanco (fondos con masa azul debajo:
                               3, 7, 11, 12). Es lo mismo que hace la plantilla
                               en su lámina 3. El filete sigue amarillo.
-     · `cabeceraIzquierda`  → título a la izquierda (fondo 19: la banda
-                              amarilla ocupa toda la esquina derecha).
+     · `cabeceraIzquierda`  → título a la izquierda. Es el valor por
+                              defecto: el sello con el isotipo ocupa la
+                              esquina superior derecha, así que el título va
+                              al lado contrario para no competir con él.
      · `selloEnBanda`       → el isotipo va DENTRO de la banda amarilla, en el
                               hueco que dejó el sello institucional retirado. */
 export default function Lamina({
@@ -23,7 +25,7 @@ export default function Lamina({
   subtitulo,
   oscura = false,            // fondo azul a sangre: texto y cromo en negativo
   cabeceraClara = false,     // título en blanco sin oscurecer todo el escenario
-  cabeceraIzquierda = false,
+  cabeceraIzquierda = true,  // título en el lado opuesto al sello
   selloBlanco = false,       // sello blanco cuando el fondo bajo la esquina es amarillo
   selloEnBanda = false,
   sinCabecera = false,
@@ -35,7 +37,7 @@ export default function Lamina({
   const claro = cabeceraClara || oscura
 
   return (
-    <div className={`lamina ${oscura ? 'lamina-oscura' : ''} ${className}`}>
+    <div className={`lamina ${fondo ? `fondo-${fondo}` : 'fondo-blanco'} ${oscura ? 'lamina-oscura' : ''} ${className}`}>
       {src && <img className="lamina-fondo" src={src} alt="" />}
 
       {!sinCabecera && titulo && (

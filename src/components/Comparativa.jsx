@@ -1,6 +1,6 @@
-/* Tarjeta de variación junio → julio 2026.
+/* Tarjeta de variación entre dos momentos (julio → agosto 2026).
 
-   El deck cierra en julio, así que el último mes necesita su referencia
+   El deck cierra en agosto, así que el último mes necesita su referencia
    inmediata: sin ella una cifra suelta no dice si el negocio venía subiendo
    o bajando. Cada tarjeta muestra los dos meses y el signo del cambio, con
    el mismo semáforo verde/rojo de los tableros de Power BI.
@@ -10,8 +10,8 @@
    y no sólo en porcentaje. */
 export default function Comparativa({
   rot,
-  junio,
-  julio,
+  antes,
+  ahora,
   delta,
   pie,
   destacada = false,
@@ -30,9 +30,9 @@ export default function Comparativa({
     <div className={`tarjeta-cifra ${destacada ? 'destacada' : ''}`}>
       <div className="rot">{rot}</div>
       <div className="comparativa">
-        <span className="antes">{junio}</span>
+        <span className="antes">{antes}</span>
         <span className="flecha" aria-hidden="true">→</span>
-        <span className="ahora">{julio}</span>
+        <span className="ahora">{ahora}</span>
       </div>
       <div>
         <span className={`delta ${clase}`}>{delta}</span>

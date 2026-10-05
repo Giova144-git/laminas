@@ -1,26 +1,23 @@
 import Lamina from '../components/Lamina.jsx'
 import { Grafico } from '../components/Grafico.jsx'
 import Comparativa from '../components/Comparativa.jsx'
+import Conclusion from '../components/Conclusion.jsx'
 
-/* Participación por grupo — la lámina bisagra del deck. El recorte es de la
-   lámina 4 del PPTX de KPIs, con las tres series (CIAM, Emergencia,
-   Hospitalización) sobre el mismo eje.
+/* Participación por grupo — recorte de la lámina 4 del PDF de agosto, con
+   las tres series (CIAM, Emergencia, Hospitalización) sobre el mismo eje.
+   Volumen y ticket del año: láminas 5 a 10.
 
-   Cada grupo va en UNA sola tarjeta: el movimiento de junio a julio arriba y
-   su tamaño en el período al pie. Antes la información estaba repartida en
-   dos filas —la columna de la derecha y una fila inferior— y a las tarjetas
-   de la columna les quedaban 134 px para un contenido que pedía más del
-   doble, así que el texto se salía. Consolidarlas quita la duplicación y de
-   paso le devuelve altura al gráfico.
-
-   Volumen y ticket por grupo salen de las láminas 5 a 10 del mismo PPTX. Son
-   los que dimensionan la oportunidad: Emergencia es el segundo grupo por
-   volumen y el último por conversión. */
+   Agosto aislado por grupo, por diferencia con enero – julio (CIAM 827
+   altas / 269 compraron, Hosp. 3.042 / 1.022, Emer. 2.149 / 261):
+     CIAM 171 altas, 46 compraron → 26,90 %
+     Hosp. 533 altas, 176 compraron → 33,02 %
+     Emer. 316 altas, 40 compraron → 12,66 %
+   Los tres porcentajes coinciden con los puntos de agosto del gráfico. */
 export default function S09Grupos() {
   return (
-    <Lamina fondo={10} titulo="Participación por grupo" subtitulo="Enero – julio 2026">
+    <Lamina fondo={17} titulo="Participación por grupo" subtitulo="Enero – agosto 2026">
       <div className="lienzo">
-        <div className="bloque-grafico fila-crece">
+        <div className="bloque-grafico fila-crece" style={{ gridTemplateColumns: 'minmax(0, 1fr) 540px' }}>
           <div className="marco-grafico">
             <Grafico
               name="sem-grupos.png"
@@ -29,38 +26,36 @@ export default function S09Grupos() {
           </div>
           <div className="columna-cifras">
             <Comparativa
-              rot="CIAM · consulta"
-              junio="36,56 %"
-              julio="37,10 %"
-              delta="+1,5 %"
-              pie="827 altas · 32,53 % · ticket $60,83"
+              rot="CIAM · julio → agosto"
+              antes="37,10 %"
+              ahora="26,90 %"
+              delta="−27,5 %"
+              pie="Agosto: 46 de 171 altas · año: 998 altas, ticket $59,46"
             />
             <Comparativa
-              rot="Hospitalización"
-              junio="39,64 %"
-              julio="33,07 %"
-              delta="−16,6 %"
-              pie="3.042 altas · 33,60 % · ticket $81,61"
+              rot="Hospitalización · julio → agosto"
+              antes="33,07 %"
+              ahora="33,02 %"
+              delta="estable"
+              pie="Agosto: 176 de 533 altas · año: 3.575 altas, ticket $83,51"
             />
             <Comparativa
               destacada
-              rot="Emergencia"
-              junio="14,11 %"
-              julio="17,54 %"
-              delta="+24,3 %"
-              pie="2.149 altas · 12,15 % · ticket $59,08"
+              rot="Emergencia · julio → agosto"
+              antes="17,54 %"
+              ahora="12,66 %"
+              delta="−27,8 %"
+              pie="Agosto: 40 de 316 altas · año: 2.465 altas, ticket $58,47"
             />
           </div>
         </div>
 
-        <div className="banda-nota">
-          <div className="nota">
-            Emergencia es el segundo grupo por volumen —2.149 de las 6.018 altas del
-            período— y el que menos convierte: ahí está la mayor oportunidad medida del
-            negocio. Julio trae su mejor señal del año: subió 3,43 puntos sobre junio,
-            la mayor mejora de los tres grupos.
-          </div>
-        </div>
+        <Conclusion>
+          Hospitalización, que trajo más de la mitad de las altas del mes (533 de 1.020),
+          sostuvo su conversión en 33 %. La caída de agosto viene de CIAM (−10,20 puntos) y
+          de Emergencia (−4,88 puntos), que sigue siendo el grupo que menos convierte: 40
+          compradores sobre 316 altas.
+        </Conclusion>
       </div>
     </Lamina>
   )

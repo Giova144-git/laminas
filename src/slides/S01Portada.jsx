@@ -46,28 +46,21 @@ export default function S01Portada() {
         }} />
       </div>
 
-      {/* título sobre la masa amarilla, en la misma posición de la plantilla */}
-      <div style={{ position: 'absolute', left: 58, top: 486, zIndex: 10, maxWidth: 840 }}>
-        <h1 className="anim" style={{ fontSize: 78, color: 'var(--fm-tinta)', animationDelay: '0.08s' }}>
+      {/* título sobre la masa amarilla, en la misma posición de la plantilla.
+          El mes va con cuerpo de título (no de subtítulo) porque ES el título:
+          "Gestión operativa · Agosto 2026". */}
+      <div style={{ position: 'absolute', left: 58, top: 448, zIndex: 10, maxWidth: 900 }}>
+        <h1 className="anim" style={{ fontSize: 84, lineHeight: 1.02, color: 'var(--fm-tinta)', animationDelay: '0.08s' }}>
           Gestión operativa
         </h1>
         <div
           className="anim"
           style={{
-            fontFamily: 'var(--fuente-titulo)', fontWeight: 700, fontSize: 38,
-            marginTop: 16, color: 'var(--fm-tinta)', animationDelay: '0.18s',
+            fontFamily: 'var(--fuente-titulo)', fontWeight: 700, fontSize: 64, lineHeight: 1.05,
+            marginTop: 6, color: 'var(--fm-azul)', animationDelay: '0.14s',
           }}
         >
-          Agosto 2025 – Julio 2026
-        </div>
-        <div
-          className="anim"
-          style={{
-            fontFamily: 'var(--fuente-texto)', fontSize: 22, marginTop: 22,
-            color: 'rgba(20,33,61,0.72)', animationDelay: '0.26s',
-          }}
-        >
-          Resultados y plan de acción · Septiembre – Noviembre 2026
+          Agosto 2026
         </div>
       </div>
     </Lamina>

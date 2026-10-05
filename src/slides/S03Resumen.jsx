@@ -1,20 +1,18 @@
 import Lamina from '../components/Lamina.jsx'
 import Comparativa from '../components/Comparativa.jsx'
+import Conclusion from '../components/Conclusion.jsx'
 
-/* Resumen del período — las cifras de cabecera del tablero general (lámina 14
-   del PPTX de KPIs), reescritas en tarjetas propias y repartidas en una
-   rejilla de 3×3 que ocupa el alto completo de la lámina.
+/* Resumen del período — cifras de cabecera del tablero general (lámina 14
+   del PDF "KPI's farmacia Agosto 26"): septiembre 2025 – agosto 2026 contra
+   el período pasado (PP). La última fila cierra con el mes: julio → agosto.
 
-   La última fila cierra con el mes: junio contra julio. La composición de la
-   venta y el tipo de cliente salieron de aquí porque ya tienen su lámina
-   propia con los donuts del tablero — repetirlas restaba sitio al dato que
-   sí faltaba, que era el cierre.
-
-   El margen del mes va en PORCENTAJE, no en dólares: en dólares caía un 4 %
-   —arrastrado por el volumen— y eso leía como deterioro cuando la tasa se
-   mantuvo. Es además el mismo lenguaje de la tarjeta anual (42,56 %). Los
-   dos porcentajes salen de importes que Power BI redondea a miles, así que
-   van con "≈" y la variación se declara estable en vez de fingir décimas. */
+   Facturación de julio y agosto: etiquetas al céntimo del gráfico mensual
+   ($117.175,00 y $122.579,66). El margen del mes sale del gráfico de
+   márgenes (lámina 19), que Power BI redondea a miles: va con "≈".
+     julio  ≈ $50 mil / $117.175  → ≈ 42,7 %
+     agosto ≈ $49 mil / $122.580  → ≈ 40,2 %  (costo ≈ $73 mil lo confirma)
+   El período pasado de facturación se muestra truncado en el tablero
+   ("$1.105.357,…"): se cita sin céntimos. */
 
 function Cifra({ rot, val, delta, pie, sm }) {
   return (
@@ -31,34 +29,40 @@ function Cifra({ rot, val, delta, pie, sm }) {
 
 export default function S03Resumen() {
   return (
-    <Lamina fondo={4} titulo="Resumen del período" subtitulo="Agosto 2025 – Julio 2026">
+    <Lamina fondo={17} titulo="Resumen del período" subtitulo="Septiembre 2025 – agosto 2026 · frente a septiembre 2024 – agosto 2025">
       <div className="lienzo">
         <div
           className="rejilla rejilla-3 fila-crece"
-          style={{ gridTemplateRows: 'repeat(3, minmax(0, 1fr))' }}
+          style={{ gridTemplateRows: 'repeat(3, minmax(0, 1fr))', gap: 16 }}
         >
-          <Cifra rot="Facturación" val="$1.226.616,10" delta="+12,7 %" pie="Antes: $1.088.628,80" />
-          <Cifra rot="Unidades" val="237.285" delta="+12,2 %" pie="Antes: 211.563" />
-          <Cifra rot="Facturas" val="53.818" delta="+25,3 %" pie="Antes: 43.166" />
-          <Cifra rot="Ticket promedio" val="$22,80" delta="−9,7 %" pie="Antes: $25,24" />
-          <Cifra rot="Clientes" val="19.308" delta="+6,77 %" pie="Antes: 18.084" />
-          <Cifra rot="Margen bruto" val="42,56 %" pie="Costo promedio: $704.729,06" />
-          <Cifra rot="Tasa de recompra" val="45,24 %" delta="+1,54 %" pie="Uno de cada dos clientes vuelve" />
+          <Cifra rot="Facturación · 12 meses" val="$1.249.909,29" delta="+13,1 %" pie="12 meses anteriores: $1.105.357" />
+          <Cifra rot="Unidades · 12 meses" val="240.226" delta="+12,5 %" pie="12 meses anteriores: 213.560" />
+          <Cifra rot="Facturas · 12 meses" val="55.665" delta="+27,7 %" pie="12 meses anteriores: 43.776" />
+          <Cifra rot="Ticket promedio · 12 meses" val="$22,46" delta="−11,1 %" pie="12 meses anteriores: $25,27" />
+          <Cifra rot="Clientes · 12 meses" val="19.539" delta="+7,42 %" pie="12 meses anteriores: 18.189" />
+          <Cifra rot="Margen bruto · 12 meses" val="42,21 %" pie="Costo promedio: $722.474,05" />
+          <Cifra rot="Tasa de recompra · 12 meses" val="45,09 %" delta="+1,06 %" pie="Casi uno de cada dos clientes vuelve" />
           <Comparativa
-            rot="Facturación del mes · junio → julio"
-            junio="$122.281"
-            julio="≈ $117 mil"
-            delta="≈ −4 %"
+            rot="Facturación del mes · julio → agosto"
+            antes="$117.175"
+            ahora="$122.580"
+            delta="+4,6 %"
           />
           <Comparativa
             destacada
-            rot="Margen bruto del mes · junio → julio"
-            junio="≈ 42,6 %"
-            julio="≈ 42,7 %"
-            delta="estable"
-            pie="El margen se sostuvo con menos volumen"
+            rot="Margen bruto del mes · julio → agosto"
+            antes="≈ 42,7 %"
+            ahora="≈ 40,2 %"
+            delta="≈ −2,5 puntos"
           />
         </div>
+
+        <Conclusion>
+          Los últimos doce meses cerraron en $1.249.909,29, un 13,1 % sobre los doce anteriores,
+          con más facturas y más clientes pero un ticket 11,1 % menor. Agosto fue el mes
+          más alto del período (+4,6 % sobre julio); su margen, en cambio, bajó cerca de
+          2,5 puntos.
+        </Conclusion>
       </div>
     </Lamina>
   )

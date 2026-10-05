@@ -1,70 +1,63 @@
 import Lamina from '../components/Lamina.jsx'
 import { Grafico } from '../components/Grafico.jsx'
 import Comparativa from '../components/Comparativa.jsx'
+import Conclusion from '../components/Conclusion.jsx'
 
-/* Rentabilidad del convenio — recortes de las láminas 13 y 20 del PPTX de
-   KPIs: márgenes del convenio Mercantil y su facturación mensual.
+/* Rentabilidad del convenio — recorte de la lámina 13 del PDF de agosto
+   (márgenes del convenio Mercantil, marzo – agosto 2026).
 
-   Nota de método: el tablero muestra 150 facturas en la tarjeta y una serie
-   mensual que suma 498. Las tarjetas de importe usan los valores del gráfico,
-   que sí concilian; el conteo de facturas se cita sólo como serie mensual,
-   que es lo que el propio gráfico etiqueta. */
+   Agosto aislado, por diferencia con la tarjeta de marzo – julio del deck
+   anterior (ingresos $10.403,95, costo $5.473,55):
+     ingresos agosto $6.892,09 (cuadra con el facturado de la lámina 20)
+     costo agosto    $3.718,41
+     margen agosto   $3.173,68 → 39 % de los $8.104,08 de margen en
+                     dólares acumulados desde marzo
+   El margen superior al de la farmacia es INTENCIONAL: los precios del
+   convenio se subieron para compensar el cobro a 30 días con devaluación.
+   Se presenta como protección que funcionó, no como resultado extraordinario.
+   El margen porcentual del tablero (44,92 % → 45,38 %) no sale de
+   (ingresos − costo) / ingresos, así que no se recalcula por mes: se cita el
+   del tablero y su movimiento. */
 export default function S12Convenio() {
   return (
-    <Lamina fondo={13} titulo="Rentabilidad del convenio" subtitulo="Mercantil Seguros">
+    <Lamina fondo={9} titulo="Rentabilidad del convenio" subtitulo="Mercantil Seguros · marzo – agosto 2026">
       <div className="lienzo">
-        <div
-          className="fila-crece"
-          style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr) 400px', gap: 26 }}
-        >
-          <div style={{ display: 'grid', gridTemplateRows: 'minmax(0, 1fr) minmax(0, 1fr)', gap: 20, minHeight: 0 }}>
-            <div className="marco-grafico">
-              <Grafico name="mercantil-margen.png" alt="Ingresos, costo promedio y margen bruto del convenio Mercantil" />
-            </div>
-            <div className="marco-grafico">
-              <Grafico name="mercantil-facturado.png" alt="Facturación mensual del convenio Mercantil" />
-            </div>
+        <div className="grafico-y-rejilla columna-ancha fila-crece">
+          <div className="marco-grafico">
+            <Grafico name="mercantil-margen.png" alt="Ingresos, costo promedio y margen bruto del convenio Mercantil" />
           </div>
           <div className="columna-cifras">
             <div className="tarjeta-cifra">
-              <div className="rot">Ingresos del convenio</div>
-              <div className="val val-sm">$10.403,95</div>
-              <div className="pie">Costo promedio: $5.473,55</div>
+              <div className="rot">Ingresos del convenio · <span className="sin-corte">marzo – agosto</span></div>
+              <div className="val val-sm">$17.296,04</div>
+              <div className="pie">Costo promedio: $9.191,96</div>
             </div>
             <div className="tarjeta-cifra destacada">
-              <div className="rot">Margen bruto</div>
-              <div className="val">44,92 %</div>
-              <div className="pie">General del período: 42,56 %</div>
+              <div className="rot">Margen bruto · <span className="sin-corte">marzo – agosto</span></div>
+              <div className="val">45,38 %</div>
+              <div className="pie">Precio protegido por el cobro a 30 días · farmacia: 42,21 %</div>
             </div>
             <Comparativa
-              rot="Facturado · junio → julio"
-              junio="$3.705,70"
-              julio="$2.531,60"
-              delta="−31,7 %"
-              pie="Junio fue el mes más alto del convenio"
+              rot="Margen acumulado · a julio → a agosto"
+              antes="44,92 %"
+              ahora="45,38 %"
+              delta="+0,46 puntos"
+              pie="La protección se sostuvo con el triple de volumen"
             />
+            <div className="tarjeta-cifra">
+              <div className="rot">Margen en dólares de agosto</div>
+              <div className="val val-sm">$3.173,68</div>
+              <div className="pie">39 % del acumulado desde marzo · ingresos $6.892,09, costo $3.718,41</div>
+            </div>
           </div>
         </div>
 
-        <div className="rejilla rejilla-3" style={{ minHeight: 176 }}>
-          <Comparativa
-            rot="Facturas del convenio · junio → julio"
-            junio="138"
-            julio="148"
-            delta="+7,2 %"
-            pie="+10 facturas · más operaciones con menos importe cada una"
-          />
-          <div className="tarjeta-cifra">
-            <div className="rot">Facturado en el período</div>
-            <div className="val val-sm">$9.937,40</div>
-            <div className="pie">Ticket promedio: $66,69</div>
-          </div>
-          <div className="tarjeta-cifra">
-            <div className="rot">Arranque del convenio</div>
-            <div className="val val-sm">$45,07</div>
-            <div className="pie">Marzo 2026, primer mes · en julio ya multiplicaba por 56</div>
-          </div>
-        </div>
+        <Conclusion>
+          El margen del convenio está por encima del de la farmacia (45,38 % contra 42,21 %)
+          por diseño: sus precios incluyen la protección por el cobro a 30 días con devaluación.
+          No es un resultado extraordinario, es la prevención funcionando, y se sostuvo con el
+          triple de volumen en agosto.
+        </Conclusion>
       </div>
     </Lamina>
   )

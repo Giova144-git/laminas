@@ -1,59 +1,57 @@
 import Lamina from '../components/Lamina.jsx'
 import { Grafico } from '../components/Grafico.jsx'
 import Comparativa from '../components/Comparativa.jsx'
+import Conclusion from '../components/Conclusion.jsx'
 
-/* Facturación — recorte directo del gráfico mensual del tablero general
-   (lámina 14 del PPTX de KPIs): período actual contra período pasado.
+/* Facturación — recorte del gráfico mensual del tablero general (lámina 14
+   del PDF de agosto): período actual contra período pasado.
 
-   La cuarta tarjeta cierra el mes: julio contra junio. Los importes de esos
-   dos meses se leen del gráfico de márgenes, que Power BI redondea a miles;
-   por eso julio va con "≈". Junio sí está etiquetado al céntimo en el propio
-   gráfico de facturación. */
+   Todas las cifras del mes están etiquetadas al céntimo en el propio gráfico:
+   julio $117.175,00 (−4,18 % sobre junio), agosto $122.579,66 (+4,61 %),
+   junio $122.281,06, julio 2025 $119.826,04 y agosto 2025 $99.257,22.
+   Agosto es el máximo de los doce meses. */
 export default function S04Facturacion() {
   return (
-    <Lamina fondo={5} titulo="Facturación" subtitulo="Agosto 2025 – Julio 2026">
+    <Lamina fondo={9} titulo="Facturación" subtitulo="Septiembre 2025 – agosto 2026 · frente a septiembre 2024 – agosto 2025">
       <div className="lienzo">
-        <div className="marco-grafico" style={{ flex: '0 0 430px' }}>
+        <div className="marco-grafico fila-crece">
           <Grafico
             name="anual-facturacion.png"
             alt="Facturación mensual, período actual contra período pasado"
           />
         </div>
 
-        <div className="rejilla rejilla-4 fila-crece">
+        <div className="rejilla rejilla-4" style={{ minHeight: 200 }}>
           <div className="tarjeta-cifra">
-            <div className="rot">Facturación del período</div>
-            <div className="val val-sm">$1.226.616,10 <span className="delta sube" style={{ fontSize: 17 }}>+12,7 %</span></div>
-            <div className="pie">Período anterior: $1.088.628,80</div>
+            <div className="rot">Facturación · 12 meses</div>
+            <div className="val val-sm">$1.249.909,29 <span className="delta sube" style={{ fontSize: 17 }}>+13,1 %</span></div>
+            <div className="pie">12 meses anteriores: $1.105.357</div>
           </div>
           <div className="tarjeta-cifra">
-            <div className="rot">Facturas emitidas</div>
-            <div className="val val-sm">53.818 <span className="delta sube" style={{ fontSize: 17 }}>+25,3 %</span></div>
-            <div className="pie">Período anterior: 43.166</div>
+            <div className="rot">Facturas emitidas · 12 meses</div>
+            <div className="val val-sm">55.665 <span className="delta sube" style={{ fontSize: 17 }}>+27,7 %</span></div>
+            <div className="pie">12 meses anteriores: 43.776</div>
           </div>
           <div className="tarjeta-cifra">
-            <div className="rot">Ticket promedio</div>
-            <div className="val val-sm">$22,80 <span className="delta baja" style={{ fontSize: 17 }}>−9,7 %</span></div>
-            <div className="pie">Período anterior: $25,24</div>
+            <div className="rot">Ticket promedio · 12 meses</div>
+            <div className="val val-sm">$22,46 <span className="delta baja" style={{ fontSize: 17 }}>−11,1 %</span></div>
+            <div className="pie">12 meses anteriores: $25,27</div>
           </div>
           <Comparativa
             destacada
-            rot="Cierre del mes · junio → julio"
-            junio="$122.281"
-            julio="≈ $117 mil"
-            delta="−4 %"
-            pie="Junio fue el mes más alto del período"
+            rot="Cierre del mes · julio → agosto"
+            antes="$117.175"
+            ahora="$122.580"
+            delta="+4,6 %"
+            pie="El mes más alto de los últimos doce"
           />
         </div>
 
-        <div className="banda-nota">
-          <div className="nota">
-            Junio cerró en $122.281,06, el mes más alto de los doce. Julio bajó cerca
-            de un 4 % frente a junio y quedó por debajo de los $119.826,04 de julio
-            2025: es el único mes del cierre por debajo de su equivalente del período
-            anterior.
-          </div>
-        </div>
+        <Conclusion>
+          Agosto cerró en $122.579,66: el mes más alto de los doce, un 4,6 % sobre julio
+          ($117.175,00) y un 23,5 % sobre agosto 2025 ($99.257,22). Julio había quedado por
+          debajo de julio 2025 ($119.826,04); agosto recuperó la tendencia.
+        </Conclusion>
       </div>
     </Lamina>
   )
